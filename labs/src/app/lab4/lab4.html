@@ -1,0 +1,23 @@
+
+<form class="row" (ngSubmit)="addStudent()">
+  <input class="name" [(ngModel)]="name" name="name" placeholder="ПІБ студента" autocomplete="off">
+  <input class="grade" type="number" [(ngModel)]="grade" name="grade" placeholder="Оцінка" min="0" max="100">
+  <button type="submit" [disabled]="!isValid()">Додати</button>
+</form>
+<p class="hint">Оцінка за 100-бальною шкалою (0–100)</p>
+
+<ul>
+  @for (s of students; track $index) {
+    <li>
+      <span>{{ $index + 1 }}. {{ s.name }}</span>
+      <span class="right">
+        <b>{{ s.grade }}</b>
+        <button class="delete" (click)="removeStudent($index)" title="Видалити">✕</button>
+      </span>
+    </li>
+  } @empty {
+    <li class="empty">Студентів ще немає</li>
+  }
+</ul>
+
+<app-child [students]="students"></app-child>

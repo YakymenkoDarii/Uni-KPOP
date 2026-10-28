@@ -1,0 +1,10 @@
+<div class="result">
+  <span>Середній бал групи</span>
+  @if (students.length) {
+    <strong>{{ average | number: '1.0-2' }}</strong>
+    <small>студентів: {{ students.length }}</small>
+  } @else {
+    <strong>—</strong>
+    <small>додайте хоча б одного студента</small>
+  }
+</div>

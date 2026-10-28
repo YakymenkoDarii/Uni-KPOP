@@ -1,0 +1,17 @@
+<form class="row" (ngSubmit)="addName()">
+  <input [(ngModel)]="newName" name="newName" placeholder="Введіть ім'я" autocomplete="off">
+  <button type="submit" [disabled]="!newName.trim()">Додати</button>
+</form>
+
+<p class="count">Кількість імен: {{ names.length }}</p>
+
+<ul>
+  @for (name of names; track $index) {
+    <li>
+      <span>{{ $index + 1 }}. {{ name }}</span>
+      <button class="delete" (click)="removeName($index)" title="Видалити">✕</button>
+    </li>
+  } @empty {
+    <li class="empty">Список порожній</li>
+  }
+</ul>

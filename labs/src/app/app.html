@@ -1,0 +1,19 @@
+<main class="card">
+  <nav class="tabs">
+    <button [class.active]="tab === 'lab3'" (click)="tab = 'lab3'">Практична №3</button>
+    <button [class.active]="tab === 'lab4'" (click)="tab = 'lab4'">Практична №4</button>
+  </nav>
+
+  <!-- [hidden] замість @if, щоб дані не зникали при перемиканні вкладок -->
+  <section [hidden]="tab !== 'lab3'">
+    <h1>Список імен</h1>
+    <p class="subtitle">Варіант 2 — створює список імен, введених у текстове поле</p>
+    <app-name-list></app-name-list>
+  </section>
+
+  <section [hidden]="tab !== 'lab4'">
+    <h1>Середній бал групи</h1>
+    <p class="subtitle">Варіант 2 — головний компонент вводить студентів, дочірній рахує середній бал</p>
+    <app-lab4></app-lab4>
+  </section>
+</main>
