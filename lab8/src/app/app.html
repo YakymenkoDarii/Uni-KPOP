@@ -1,0 +1,29 @@
+@let count = (facade.favoritesCount$ | async) ?? 0;
+
+<mat-toolbar class="topbar">
+  <mat-icon>group</mat-icon>
+  <span class="title">Користувачі системи</span>
+  <span class="spacer"></span>
+  <mat-icon [matBadge]="count" [matBadgeHidden]="count === 0" matBadgeColor="warn">star</mat-icon>
+</mat-toolbar>
+
+<main class="layout">
+  <mat-card appearance="outlined" class="table-card">
+    <mat-card-header>
+      <mat-card-title>Практична №8 — дизайн патерни (на основі ПР №5, варіант 1)</mat-card-title>
+      <mat-card-subtitle>
+        Дані з randomuser.me (axios) · клік по рядку — повна інформація · ☆ — додати у вибране
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-chip-set class="patterns" aria-label="Використані патерни">
+        @for (p of patterns; track p) {
+          <mat-chip>{{ p }}</mat-chip>
+        }
+      </mat-chip-set>
+      <app-users-table></app-users-table>
+    </mat-card-content>
+  </mat-card>
+
+  <app-favorites class="favorites"></app-favorites>
+</main>

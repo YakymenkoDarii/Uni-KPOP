@@ -1,0 +1,44 @@
+:host { display: block; }
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.search { flex: 1; }
+
+.table-wrap { overflow-x: auto; }
+
+table { width: 100%; }
+
+.row { cursor: pointer; }
+.row:hover { background: #eef2ff; }
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: block;
+}
+
+code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.fav-btn { color: #9ca3af; }
+.fav-btn.active { color: #f59e0b; }
+
+.error { color: #b91c1c; }
+
+.empty {
+  padding: 24px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.mat-column-phone { white-space: nowrap; }

@@ -1,0 +1,95 @@
+<div class="toolbar">
+  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="search">
+    <mat-label>Пошук</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput (input)="applyFilter($event)" placeholder="Ім’я, email, логін..." />
+  </mat-form-field>
+
+  <!-- Strategy: вибір алгоритму сортування -->
+  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="sort">
+    <mat-label>Сортування (Strategy)</mat-label>
+    <mat-select
+      [value]="(facade.activeStrategy$ | async)?.id"
+      (selectionChange)="facade.setSortStrategy($event.value)"
+    >
+      @for (s of facade.strategies; track s.id) {
+        <mat-option [value]="s.id">{{ s.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-stroked-button (click)="facade.loadUsers()" [disabled]="facade.loading$ | async">
+    <mat-icon>refresh</mat-icon>
+    Оновити
+  </button>
+</div>
+
+@if (facade.loading$ | async) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+@if (facade.error$ | async; as error) {
+  <p class="error">{{ error }}</p>
+}
+
+<div class="table-wrap">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="avatar">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let user">
+        <img class="avatar" [src]="user.avatar" [alt]="user.fullName" />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef>Ім’я</th>
+      <td mat-cell *matCellDef="let user">{{ user.fullName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>Логін</th>
+      <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="password">
+      <th mat-header-cell *matHeaderCellDef>Пароль</th>
+      <td mat-cell *matCellDef="let user"><code>{{ user.password }}</code></td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Телефон</th>
+      <td mat-cell *matCellDef="let user">{{ user.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="favorite">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let user">
+        <button
+          mat-icon-button
+          class="fav-btn"
+          [class.active]="facade.isFavorite(user.id)"
+          [matTooltip]="facade.isFavorite(user.id) ? 'Прибрати з вибраного' : 'Додати у вибране'"
+          (click)="toggleFavorite(user, $event)"
+        >
+          <mat-icon>{{ facade.isFavorite(user.id) ? 'star' : 'star_border' }}</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let user; columns: columns" class="row" (click)="facade.openDetails(user)"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell empty" [attr.colspan]="columns.length">
+        {{ (facade.loading$ | async) ? 'Завантаження...' : 'Нічого не знайдено' }}
+      </td>
+    </tr>
+  </table>
+</div>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 50]" [pageSize]="10" showFirstLastButtons></mat-paginator>

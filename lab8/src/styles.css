@@ -1,0 +1,10 @@
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Segoe UI", system-ui, sans-serif;
+  color: #1f2937;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f5f3ff 100%);
+}

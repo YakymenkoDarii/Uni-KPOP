@@ -1,0 +1,60 @@
+<div class="header">
+  <img [src]="user.avatarLarge" [alt]="user.fullName" />
+  <div>
+    <h2>{{ user.title }} {{ user.fullName }}</h2>
+    <p class="muted">{{ user.city }}, {{ user.country }}</p>
+  </div>
+</div>
+
+<mat-dialog-content>
+  <mat-list>
+    <mat-list-item>
+      <mat-icon matListItemIcon>email</mat-icon>
+      <span matListItemTitle>{{ user.email }}</span>
+      <span matListItemLine>Email</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon>person</mat-icon>
+      <span matListItemTitle>{{ user.username }}</span>
+      <span matListItemLine>Логін</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon>key</mat-icon>
+      <span matListItemTitle>{{ user.password }}</span>
+      <span matListItemLine>Пароль</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon>phone</mat-icon>
+      <span matListItemTitle>{{ user.phone }}</span>
+      <span matListItemLine>Телефон (моб. {{ user.cell }})</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon>cake</mat-icon>
+      <span matListItemTitle>{{ user.birthDate | date: 'dd.MM.yyyy' }} ({{ user.age }} р.)</span>
+      <span matListItemLine>Дата народження</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon>wc</mat-icon>
+      <span matListItemTitle>{{ user.gender === 'male' ? 'Чоловіча' : 'Жіноча' }}</span>
+      <span matListItemLine>Стать</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon>home</mat-icon>
+      <span matListItemTitle>{{ user.address }}</span>
+      <span matListItemLine>Адреса</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon>event</mat-icon>
+      <span matListItemTitle>{{ user.registeredAt | date: 'dd.MM.yyyy' }}</span>
+      <span matListItemLine>Зареєстрований</span>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Закрити</button>
+  <button mat-flat-button (click)="favorites.toggle(user)">
+    <mat-icon>{{ favorites.isFavorite(user.id) ? 'star' : 'star_border' }}</mat-icon>
+    {{ favorites.isFavorite(user.id) ? 'Прибрати з вибраного' : 'Додати у вибране' }}
+  </button>
+</mat-dialog-actions>

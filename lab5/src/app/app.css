@@ -1,0 +1,31 @@
+.topbar {
+  background: #4338ca;
+  color: #fff;
+  gap: 12px;
+}
+
+.title { font-weight: 500; }
+
+.spacer { flex: 1; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.table-card mat-card-header { margin-bottom: 16px; }
+
+.favorites {
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr; }
+  .favorites { position: static; }
+}

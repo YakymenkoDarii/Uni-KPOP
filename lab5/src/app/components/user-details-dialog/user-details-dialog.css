@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 24px 24px 8px;
+}
+
+.header img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 3px solid #c7d2fe;
+}
+
+h2 { margin: 0; font-size: 22px; }
+
+.muted { margin: 4px 0 0; color: #6b7280; }

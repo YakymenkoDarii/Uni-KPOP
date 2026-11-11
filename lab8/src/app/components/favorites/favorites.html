@@ -1,0 +1,33 @@
+@let favorites = (facade.favorites$ | async) ?? [];
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-icon mat-card-avatar class="star">star</mat-icon>
+    <mat-card-title>Вибране</mat-card-title>
+    <mat-card-subtitle>{{ favorites.length }} користувач(ів) · Observer</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    @for (user of favorites; track user.id) {
+      <div class="fav">
+        <img [src]="user.avatar" [alt]="user.fullName" />
+        <div class="info">
+          <strong>{{ user.fullName }}</strong>
+          <span>{{ user.email }}</span>
+          <span class="muted">{{ user.username }} · {{ user.phone }}</span>
+        </div>
+        <button mat-icon-button matTooltip="Прибрати" (click)="facade.removeFavorite(user.id)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    } @empty {
+      <p class="empty">Натисніть ☆ у таблиці або в попапі, щоб додати користувача.</p>
+    }
+  </mat-card-content>
+
+  @if (favorites.length > 0) {
+    <mat-card-actions align="end">
+      <button mat-button (click)="facade.clearFavorites()">Очистити</button>
+    </mat-card-actions>
+  }
+</mat-card>

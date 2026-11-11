@@ -1,0 +1,24 @@
+<mat-toolbar class="topbar">
+  <mat-icon>group</mat-icon>
+  <span class="title">Користувачі системи</span>
+  <span class="spacer"></span>
+  <mat-icon [matBadge]="favorites.count()" [matBadgeHidden]="favorites.count() === 0" matBadgeColor="warn">
+    star
+  </mat-icon>
+</mat-toolbar>
+
+<main class="layout">
+  <mat-card appearance="outlined" class="table-card">
+    <mat-card-header>
+      <mat-card-title>Практична №6 — Варіант 1</mat-card-title>
+      <mat-card-subtitle>
+        Дані з randomuser.me (axios) · клік по рядку — повна інформація · ☆ — додати у вибране (зберігається в Ionic Storage)
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <app-users-table></app-users-table>
+    </mat-card-content>
+  </mat-card>
+
+  <app-favorites class="favorites"></app-favorites>
+</main>
